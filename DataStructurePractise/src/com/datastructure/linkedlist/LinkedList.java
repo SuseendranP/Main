@@ -61,13 +61,49 @@ public class LinkedList<E> {
 	public void deleteByValue(E e) {
 		if (headNode != null) {
 			Node tempNode = headNode;
-			Node prevNode = headNode;
-			boolean flag = true;
+			Node prevNode = null;
 			while (tempNode != null) {
 				if (tempNode.data.equals(e)) {
-
+					if (prevNode == null) {
+						headNode = tempNode.nextNode;
+						tempNode.nextNode = null;
+						size--;
+						break;
+					} else {
+						prevNode.nextNode = tempNode.nextNode;
+						tempNode.nextNode = null;
+						size--;
+						break;
+					}
 				}
+				prevNode = tempNode;
+				tempNode = tempNode.nextNode;
 			}
+		}
+	}
+
+	public void deleteByPosition(int position) {
+		if (headNode != null && position <= size) {
+
+			Node tempNode = headNode;
+			Node prevNode = null;
+
+			while (position < 1) {
+				prevNode = tempNode;
+				tempNode = tempNode.nextNode;
+				position--;
+			}
+
+			if (prevNode == null) {
+				headNode = tempNode.nextNode;
+				tempNode.nextNode = null;
+				size--;
+			} else {
+				prevNode.nextNode = tempNode.nextNode;
+				tempNode.nextNode = null;
+				size--;
+			}
+
 		}
 	}
 
